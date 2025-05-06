@@ -2,26 +2,76 @@
 
 Le composant `NumberInput` est un contrôle personnalisé pour JSON Forms permettant de gérer des champs numériques avec une personnalisation avancée. Il prend en charge trois formats : `"currency"`, `"percentage"`, et `"default"`. Les options sont définies dans `uischema.options`. Cette documentation explique chaque option, son effet selon le format, et la gestion des grands nombres.
 
-## Exemple de configuration dans le `uischema`
+## Exemple de configuration LARGE NMBERS dans le `schema & uischema`
 
 ```json
 {
-  "type": "Control",
-  "scope": "#/properties/amount",
-  "label": "Montant",
-  "options": {
-    "format": "currency",
-    "prefix": "€",
-    "suffix": "",
-    "min": -1000000,
-    "max": 1000000000000,
-    "step": 1,
-    "thousandSeparator": " ",
-    "decimalSeparator": ",",
-    "decimalPlaces": 2,
-    "local": "fr-FR",
-    "component": "NumberInput"
+  "largeAmount": {
+    "type": "string",
+    "title": "large"
   }
+}
+```
+```json
+{
+  "type": "Control",
+  "label": "largeAmount",
+  "scope": "#/properties/largeAmount",
+  "options": {
+    "component": "NumberInput",
+    "options": {
+      "max": 500000000000000000000000000000000000,
+      "min": -500000000000000000000000000000000000,
+      "grid": {
+        "sm": 6,
+        "xs": 12
+      },
+      "step": 5,
+      "local": "fr-FR",
+      "format": "currency",
+      "prefix": "%",
+      "suffix": "$",
+      "decimalPlaces": 3,
+      "decimalSeparator": ".",
+      "thousandSeparator": ","
+    }
+  }
+}
+```
+
+## Exemple de configuration SMALL NMBERS dans le `schema & uischema`
+
+```json
+{
+  "smallAmount": {
+    "type": "number",
+    "title": "small"
+  }
+}
+```
+```json
+{
+ "type": "Control",
+ "label": "smallAmount",
+ "scope": "#/properties/smallAmount",
+ "options": {
+   "options": {
+     "max": 9007199254740991,
+     "min": -9007199254740991,
+     "grid": {
+       "sm": 6,
+       "xs": 12
+     },
+     "step": 5,
+     "local": "fr-FR",
+     "format": "currency",
+     "prefix": "%",
+     "suffix": "$",
+     "decimalPlaces": 3,
+     "decimalSeparator": ".",
+     "thousandSeparator": ","
+   }
+ }
 }
 ```
 
